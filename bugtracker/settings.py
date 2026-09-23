@@ -1,9 +1,22 @@
 
 from pathlib import Path
+import os
 BASE_DIR = Path(__file__).resolve().parent.parent
-SECRET_KEY='change-me'
-DEBUG=True
-ALLOWED_HOSTS=[]
+SECRET_KEY = os.environ.get(
+    'DJANGO_SECRET_KEY',
+    'dev-only-secret-key'
+)
+
+DEBUG = os.environ.get('DEBUG', 'False') == 'True'
+
+ALLOWED_HOSTS = [
+    'bug-tracking-zeta.vercel.app',
+    'localhost',
+    '127.0.0.1',
+]
+CSRF_TRUSTED_ORIGINS = [
+    'https://bug-tracking-zeta.vercel.app',
+]
 INSTALLED_APPS=[
 'django.contrib.admin','django.contrib.auth','django.contrib.contenttypes',
 'django.contrib.sessions','django.contrib.messages','django.contrib.staticfiles',
@@ -23,7 +36,12 @@ TEMPLATES=[{'BACKEND':'django.template.backends.django.DjangoTemplates',
 'django.contrib.auth.context_processors.auth',
 'django.contrib.messages.context_processors.messages']}}]
 WSGI_APPLICATION='bugtracker.wsgi.application'
-DATABASES={'default':{'ENGINE':'django.db.backends.sqlite3','NAME':BASE_DIR/'db.sqlite3'}}
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3'
+    }
+}
 STATIC_URL='static/'
 MEDIA_URL='/media/'
 MEDIA_ROOT=BASE_DIR/'media'
