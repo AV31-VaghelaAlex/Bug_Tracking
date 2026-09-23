@@ -11,16 +11,22 @@ DEBUG = os.environ.get('DEBUG', 'False') == 'True'
 
 ALLOWED_HOSTS = [
     'bug-tracking-zeta.vercel.app',
+    '.vercel.app',
     'localhost',
     '127.0.0.1',
 ]
 CSRF_TRUSTED_ORIGINS = [
     'https://bug-tracking-zeta.vercel.app',
 ]
-INSTALLED_APPS=[
-'django.contrib.admin','django.contrib.auth','django.contrib.contenttypes',
-'django.contrib.sessions','django.contrib.messages','django.contrib.staticfiles',
-'bugs']
+INSTALLED_APPS = [
+    'django.contrib.admin',
+    'django.contrib.auth',
+    'django.contrib.contenttypes',
+    'django.contrib.sessions',
+    'django.contrib.messages',
+    'django.contrib.staticfiles',
+    'bugs',
+]
 MIDDLEWARE=[
 'django.middleware.security.SecurityMiddleware',
 'django.contrib.sessions.middleware.SessionMiddleware',
@@ -42,7 +48,8 @@ DATABASES = {
         'NAME': BASE_DIR / 'db.sqlite3'
     }
 }
-STATIC_URL='static/'
+STATIC_URL = '/static/'
+STATIC_ROOT = BASE_DIR / 'staticfiles'
 MEDIA_URL='/media/'
 MEDIA_ROOT=BASE_DIR/'media'
 DEFAULT_AUTO_FIELD='django.db.models.BigAutoField'
